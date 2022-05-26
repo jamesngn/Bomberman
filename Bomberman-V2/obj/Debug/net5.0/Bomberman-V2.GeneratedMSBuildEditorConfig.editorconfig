@@ -1,0 +1,10 @@
+is_global = true
+build_property.TargetFramework = net5.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.PublishSingleFile = 
+build_property.IncludeAllContentForSelfExtract = 
+build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
+build_property.RootNamespace = Bomberman_V2
+build_property.ProjectDir = C:\Users\quang\OneDrive - Swinburne University\Swinburne_University\2022-HS1-COS20007-Object Oriented Programming (Semester 1)\Projects\Bomberman\Bomberman-V2\
