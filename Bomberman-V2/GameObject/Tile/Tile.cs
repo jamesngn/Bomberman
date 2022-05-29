@@ -9,9 +9,9 @@ namespace Bomberman_V2
 {
     public class Tile : GameObject
     {
-        private const int SIZE = 50;
-        public static int TileSize => SIZE;
-        public override int Size => SIZE;
+        private const double SIZE = 50;
+        public static double TileSize => SIZE;
+        public override double Size => SIZE;
         public Tile(int RowIndex, int ColIndex, Color color) : base(RowIndex, ColIndex)
         {
             Color = color;

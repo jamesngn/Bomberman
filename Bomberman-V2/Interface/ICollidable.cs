@@ -11,5 +11,6 @@ namespace Bomberman_V2
         public void ResolveCollision(ICollidable collidable);
         public void ResolveCollision(Player player);
         public void ResolveCollision(Bomb bomb);
+        public void ResolveCollision(Enemy enemy);
     }
 }

@@ -14,6 +14,7 @@ namespace Bomberman_V2
         private List<Explosion> explosions = new List<Explosion>();
         private List<GameObject> removedObjects = new List<GameObject>();
         private List<Player> players = new List<Player>();
+        private List<Enemy> enemies = new List<Enemy>();
         private static Game _instance;
         public static Game Instance()
         {
@@ -29,6 +30,7 @@ namespace Bomberman_V2
                 if (newGO is Bomb) { bombs.Add((Bomb)newGO); }
                 if (newGO is Explosion) { explosions.Add((Explosion)newGO); }
                 if (newGO is Player) { players.Add((Player)newGO); }
+                if (newGO is Enemy) { enemies.Add((Enemy)newGO); }
             }
         }
         public void AddRemovedObject(GameObject removedGO)
@@ -42,6 +44,7 @@ namespace Bomberman_V2
                 gameobjects.Remove(removedGO);
                 if (removedGO is Bomb) { bombs.Remove((Bomb)removedGO); }
                 if (removedGO is Explosion) { explosions.Remove((Explosion)removedGO); }
+                if (removedGO is Enemy) { enemies.Remove((Enemy)removedGO); }
             }
         }
         public void RemoveTile(int row, int col)
@@ -71,9 +74,8 @@ namespace Bomberman_V2
         public void Initialise(Window w)
         {
             Floor floor = new Floor(w);
-            new Player("p2");
             new Player("p1");
-            Factory.Instance().InstantiateEnemies(floor,4);
+            Factory.Instance().InstantiateEnemies(floor,1);
         }
         public void Draw()
         {
@@ -84,6 +86,7 @@ namespace Bomberman_V2
             CollisionManager.Instance().HandleCollisions(gameobjects);
             ExplosionManager.Instance().Execute(bombs,explosions);
             RemoveObjectList();
+            enemies.ForEach(x => x.Move());
         }
     }
 }

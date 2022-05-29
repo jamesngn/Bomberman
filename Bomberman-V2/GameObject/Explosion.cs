@@ -9,7 +9,7 @@ namespace Bomberman_V2
 {
     class Explosion : GameObject
     {
-        private int SIZE = Tile.TileSize;
+        private double SIZE = Tile.TileSize;
         private int duration = 35;
         public Explosion(int rowIndex, int colIndex) : base(rowIndex, colIndex) { }
         public int Duration
@@ -17,7 +17,7 @@ namespace Bomberman_V2
             get { return duration; }
             set { duration = value; }
         }
-        public override int Size => SIZE;
+        public override double Size => SIZE;
         public override void Draw()
         {
             SplashKit.FillRectangle(SplashKit.ColorGray(), X, Y, SIZE, SIZE);

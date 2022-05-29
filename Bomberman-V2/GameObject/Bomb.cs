@@ -1,4 +1,5 @@
 ﻿using SplashKitSDK;
+using System;
 
 namespace Bomberman_V2
 {
@@ -15,10 +16,7 @@ namespace Bomberman_V2
             this.radius = radius;
             this.color = color;
         }
-        public double BombSize
-        {
-            get { return BOMBSIZE; }
-        }
+        public override double Size { get { return Tile.TileSize; }}
         public int TimeToExplosion
         {
             get { return timeToExplosion; }
@@ -37,6 +35,7 @@ namespace Bomberman_V2
             if (IsLeftAndCollidingWith(player))
             {
                 player.MoveBack();
+                /*Console.WriteLine("Reached!");*/
             }
         }
         private bool IsLeftAndCollidingWith(Player player)
@@ -44,8 +43,11 @@ namespace Bomberman_V2
             if (!isPlayerLeft) { isPlayerLeft = IsLeftBy(player); }
             if (isPlayerLeft)
             {
+                Console.WriteLine("The player collides with Bomb!: " + IsCollidingWith(player));
                 if (IsCollidingWith(player))
+                {
                     return true;
+                }
             }
             return false;
         }
@@ -57,17 +59,19 @@ namespace Bomberman_V2
             double rangeY2 = Y + Tile.TileSize;
             if (rangeX1 - player.Size < player.X && player.X < rangeX2 && rangeY1 - player.Size < player.Y && player.Y < rangeY2)
             {
+                Console.WriteLine("The player has not left!");
                 return false;
             }
             else
             {
+                Console.WriteLine("The player has left!");
                 return true;
             }
         }
         public override void Draw()
         {
-            double x = X * Tile.TileSize / 2;
-            double y = Y * Tile.TileSize / 2;
+            double x = X + Tile.TileSize / 2;
+            double y = Y + Tile.TileSize / 2;
             SplashKit.FillCircle(color, x, y, BOMBSIZE);
         }
     }

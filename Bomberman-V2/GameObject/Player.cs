@@ -43,13 +43,13 @@ namespace Bomberman_V2
         {
             if (_name == "p1")
             {
-                x = 1 * Tile.TileSize;
-                y = 1 * Tile.TileSize;
+                x = 1 * (int) Tile.TileSize;
+                y = 1 * (int) Tile.TileSize;
             }
             else if (_name == "p2")
             {
-                x = 2 * Tile.TileSize;
-                y = 1 * Tile.TileSize;
+                x = 2 * (int) Tile.TileSize;
+                y = 1 * (int) Tile.TileSize;
             }
         }
         public void StoreOldPosition()
@@ -64,15 +64,15 @@ namespace Bomberman_V2
         }
         public override int RowIndex
         {
-            get { return ((x + Tile.TileSize - 1) / Tile.TileSize) - 1; }
+            get { return ((x + (int) Tile.TileSize - 1) / (int) Tile.TileSize) - 1; }
         }
         public override int ColIndex
         {
-            get { return ((y + Tile.TileSize - 1) / Tile.TileSize) - 1; }
+            get { return ((y + (int) Tile.TileSize - 1) / (int) Tile.TileSize) - 1; }
         }
         public override int X { get { return x; } set { x = value; } }
         public override int Y { get { return y; } set { y = value; } }
-        public override int Size => SIZE;
+        public override double Size => SIZE;
         public int Speed => SPEED;
         public override void Draw()
         {

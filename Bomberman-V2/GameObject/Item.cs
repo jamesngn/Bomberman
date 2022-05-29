@@ -9,14 +9,14 @@ namespace Bomberman_V2
 {
     public abstract class Item : GameObject
     {
-        private const int SIZE = 30;
+        private const double SIZE = 30;
         public Item(int RowIndex, int ColIndex, Color color) : base(RowIndex, ColIndex)
         {
             this.Color = color;
         }
-        public override int X { get { return RowIndex* Tile.TileSize + 5; } }
-        public override int Y { get { return ColIndex * Tile.TileSize + 5; } }
-        public override int Size => SIZE;
+        public override int X { get { return RowIndex* (int) Tile.TileSize + 5; } }
+        public override int Y { get { return ColIndex * (int) Tile.TileSize + 5; } }
+        public override double Size => SIZE;
         public abstract void AddToPlayer(Player player);
         public override void Draw()
         {

@@ -16,8 +16,8 @@ namespace Bomberman_V2
         private FloorTile[,] floorTile;
         public Floor (Window w)
         {
-            rowN = w.Width  / Tile.TileSize;
-            colN = w.Height / Tile.TileSize;
+            rowN = w.Width  / (int) Tile.TileSize;
+            colN = w.Height / (int) Tile.TileSize;
             floorTile = new FloorTile[rowN, colN];
             ExplosionManager.Instance().AddFloorTile(floorTile);
             InstantiateMap();

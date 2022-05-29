@@ -22,5 +22,12 @@ namespace Bomberman_V2
                 Console.WriteLine("Detect collision! with Breakble ");
             }
         }
+        public override void ResolveCollision(Enemy enemy)
+        {
+            if (IsCollidingWith(enemy))
+            {
+                Console.WriteLine("Enemy collides with Breakable ");
+            }
+        }
     }
 }
