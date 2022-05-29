@@ -1,6 +1,6 @@
 ﻿using SplashKitSDK;
 
-namespace Bomberman_V3.ShapeClasses
+namespace Bomberman_V3
 {
     public class Rectangle : Shape
     {

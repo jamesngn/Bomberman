@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Bomberman_V3.ShapeClasses;
 
 namespace Bomberman_V3
 {
