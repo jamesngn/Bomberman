@@ -4,20 +4,23 @@ using SplashKitSDK;
 
 namespace Bomberman_V3
 {
-    public abstract class GameObject
+    public abstract class GameObject : ICollidable
     {
-        private Shape _shape;
-        public GameObject(Shape shape)
+        public virtual void ResolveCollision(ICollidable collidable) { }
+        public virtual void ResolveCollision(BreakableTile tile) { }
+        public virtual void ResolveCollision(UnbreakableTile tile) { }
+        public virtual void ResolveCollision(Player player) { }
+        public virtual void ResolveCollision(Explosion explosion) { }
+        public virtual Shape Shape { get; set; }
+        public float X { get { return Shape.X; } set { Shape.X = value; } }
+        public float Y { get { return Shape.Y; } set { Shape.Y = value; } }
+        public GameObject() 
         {
-            _shape = shape;
+            Game.Instance().AddNewObject(this);
         }
-        public float X { get { return _shape.X; } }
-        public float Y { get { return _shape.Y; } }
-        public Shape Shape { get { return _shape; } }
-        
         public bool IsCollidingWith(GameObject collider)
         {
-            return CollisionChecker.Instance().IsColliding(this._shape, collider._shape);
+            return CollisionChecker.Instance().IsColliding(this.Shape, collider.Shape);
         }
     }
 }
