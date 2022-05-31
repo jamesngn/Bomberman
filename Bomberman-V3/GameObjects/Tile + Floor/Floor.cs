@@ -19,7 +19,7 @@ namespace Bomberman_V3
             rowN = w.Width  / (int) Tile.SIZE;
             colN = w.Height / (int) Tile.SIZE;
             floorTile = new FloorTile[rowN, colN];
-            ExplosionManager.Instance().AddFloorTile(floorTile);
+            ExplosionHandler.Instance().AddFloorTile(floorTile);
             InstantiateMap();
         }
         public FloorTile[,] GetFloorTile { get { return floorTile; } }
@@ -66,9 +66,9 @@ namespace Bomberman_V3
         }
         private void ClearUpForSpawn()
         {
-            floorTile[Player.ROW_START, Player.COL_START] = FloorTile.GRASS;
-            floorTile[Player.ROW_START, Player.COL_START + 1] = FloorTile.GRASS;
-            floorTile[Player.ROW_START + 1, Player.COL_START] = FloorTile.GRASS;
+            floorTile[1,1] = FloorTile.GRASS;
+            floorTile[1,2] = FloorTile.GRASS;
+            floorTile[2,1] = FloorTile.GRASS;
         }
         private void InstantiateFromFloorTile()
         {

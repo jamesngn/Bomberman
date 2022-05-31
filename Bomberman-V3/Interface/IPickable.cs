@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Bomberman_V3
 {
-    public interface IObserver
+    interface IPickable
     {
-        public void UpdateFromSubject(IObservable subject);
+        public bool IsPicked { get; }
     }
 }

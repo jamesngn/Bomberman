@@ -15,20 +15,25 @@ namespace Bomberman_V3
                 instance = new DrawManager();
             return instance;
         }
-        public void Execute(List<GameObject> drawableObjects, List<Player> players)
+        public void Execute(List<GameObject> gameObjects)
         {
-            DrawGameBlocks(drawableObjects);
-            DrawPlayers(players);
+            DrawAllObjects(gameObjects);
         }
-        private void DrawGameBlocks(List<GameObject> drawableObjects)
+        private void DrawAllObjects(List<GameObject> gameObjects)
         {
-            foreach (GameObject d in drawableObjects)
+            List<Player> playerToDraw = new List<Player>();
+            foreach (GameObject d in gameObjects)
             {
                 if (!(d is Player))
                 {
                     d.Shape.Draw();
                 }
+                else
+                {
+                    playerToDraw.Add(d as Player);
+                }
             }
+            DrawPlayers(playerToDraw);
         }
         private void DrawPlayers(List<Player> players)
         {

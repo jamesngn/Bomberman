@@ -8,18 +8,19 @@ namespace Bomberman_V3
         static void Main(string[] args)
         {
             Window w = new Window("Bomberman", 500, 500);
-            Game.Instance().Initialise(w);
+            Bomberman game = new Bomberman(w);
+            game.Initialise();
             do
             {
                 //----
                 SplashKit.ClearScreen();
-                Game.Instance().Draw();
+                game.Draw();
                 //----
                 SplashKit.RefreshScreen(60);
-                Game.Instance().Update();
+                game.Update();
                 //----
                 SplashKit.ProcessEvents();
-                Game.Instance().Control();
+                game.Control();
             }
             while (!SplashKit.WindowCloseRequested("Bomberman"));
         }

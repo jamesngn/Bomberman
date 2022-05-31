@@ -42,9 +42,12 @@ namespace Bomberman_V3
         }
         public void InstantiateBomb(Player thePlayer)
         {
-            float x = Conversion.Instance().GetTileMiddleCoordByPlayerCoord(thePlayer.X);
-            float y = Conversion.Instance().GetTileMiddleCoordByPlayerCoord(thePlayer.Y);
-            new Bomb(x, y);
+            if (thePlayer.HasBomb)
+            {
+                float x = Conversion.Instance().GetTileMiddleCoordByPlayerCoord(thePlayer.X);
+                float y = Conversion.Instance().GetTileMiddleCoordByPlayerCoord(thePlayer.Y);
+                new Bomb(x, y, thePlayer);
+            }
         }
         public void InstantiateExplosion(int rowIndex, int colIndex)
         {
@@ -52,38 +55,40 @@ namespace Bomberman_V3
             float y = Conversion.Instance().GetCoordByIndex(colIndex);
             new Explosion(x, y);
         }
-        /*        public void InstantiateItem(int rowIndex, int colIndex)
+        public void InstantiateItem(int rowIndex, int colIndex)
+        {
+            float x = Conversion.Instance().GetCoordByIndex(rowIndex);
+            float y = Conversion.Instance().GetCoordByIndex(colIndex);
+            Random rnd = new Random();
+            double r = rnd.NextDouble();
+            if (r < ITEM_CHANCE)
+            {
+                new BombCounter(x, y);
+            }
+            else if (1 > r && r > 1 - ITEM_CHANCE * 0.3)
+            {
+                new BombRadius(x, y);
+            }
+        }
+/*        public void InstantiateEnemies(Floor floor, int noOfEnemies)
+        {
+            FloorTile[,] floorTile = floor.GetFloorTile;
+            int rowLength = floor.RowLength;
+            int colLength = floor.ColLength;
+            for (int e = 0; e < noOfEnemies; e++)
+            {
+                while (true)
                 {
                     Random rnd = new Random();
-                    double r = rnd.NextDouble();
-                    if (r < ITEM_CHANCE)
-                    {
-                        new BombCounter(rowIndex, colIndex);
-                    }
-                    else if (1 > r && r > 1 - ITEM_CHANCE * 0.3)
-                    {
-                        new BombRadius(rowIndex, colIndex);
-                    }
+                    double randomNumb = rnd.NextDouble();
+                    int randRowId = 1 + (int)(randomNumb * (rowLength - 2));
+                    randomNumb = rnd.NextDouble();
+                    int randColId = 1 + (int)(randomNumb * (colLength - 2));
+                    if (floorTile[randRowId, randColId] != FloorTile.GRASS) { continue; }
+                    new Enemy(randRowId, randColId);
+                    break;
                 }
-                public void InstantiateEnemies(Floor floor, int noOfEnemies)
-                {
-                    FloorTile[,] floorTile = floor.GetFloorTile;
-                    int rowLength = floor.RowLength;
-                    int colLength = floor.ColLength;
-                    for (int e = 0; e < noOfEnemies; e++)
-                    {
-                        while (true)
-                        {
-                            Random rnd = new Random();
-                            double randomNumb = rnd.NextDouble();
-                            int randRowId = 1 + (int)(randomNumb * (rowLength - 2));
-                            randomNumb = rnd.NextDouble();
-                            int randColId = 1 + (int)(randomNumb * (colLength - 2));
-                            if (floorTile[randRowId, randColId] != FloorTile.GRASS) { continue; }
-                            new Enemy(randRowId, randColId);
-                            break;
-                        }
-                    }
-                }*/
+            }*/
+        
     }
 }

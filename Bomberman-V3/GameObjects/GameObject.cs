@@ -16,7 +16,7 @@ namespace Bomberman_V3
         public float Y { get { return Shape.Y; } set { Shape.Y = value; } }
         public GameObject() 
         {
-            Game.Instance().AddNewObject(this);
+            SingleSource.Instance().Add(this);
         }
         public bool IsCollidingWith(GameObject collider)
         {

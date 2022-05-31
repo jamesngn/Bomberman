@@ -6,51 +6,45 @@ using System.Threading.Tasks;
 using SplashKitSDK;
 namespace Bomberman_V3
 {
-    class Bomb : GameObject, IObservable
+    public class Bomb : GameObject,IDownCountable
     {
-        private List<IObserver> observers = new List<IObserver>();
         private const int TIME = 100;
-        private float timeToExplosion = TIME;
-        private bool isPlayerLeft = false;
-        private float BombSize = (float) 0.44 * Tile.SIZE;
-        private float bombRadius = 2;
-        public float TimeToExplosion 
+        private int timeToFinish = TIME;
+        private readonly float BombSize;
+        private Player player;
+        private bool isPlayerLeft;
+        private bool finished;
+        public int TimeToFinish 
         {
-            get { return timeToExplosion; } 
+            get { return timeToFinish; } 
             set 
             {
-                timeToExplosion = value;
-                if (timeToExplosion == 0)
+                timeToFinish = value;
+                if (timeToFinish == 0)
                 {
-                    NotifyObserver(this);
+                    finished = true;
+                    player.ResetBomb();
                 }
             } 
         }
-        public float BombRadius { get { return bombRadius; } }
-        public Bomb(float x, float y)
+        public float BombRadius { get { return player.BombRadius; } }
+        public bool Finished { get { return finished; } }
+        public Bomb(float x, float y, Player owner)
         {
-            Shape = new Circle(BombSize, x, y, SplashKit.ColorMediumPurple());
-            AddObserver(Game.Instance());
-            AddObserver(ExplosionManager.Instance());
+            isPlayerLeft = false;
+            player = owner;
+
+            finished = false;
+
+            BombSize = (float) 0.44 * Tile.SIZE;
+            Shape = new Circle(BombSize, x, y, owner.BombColor);
+
+            player.LoseOneBomb();
+            Console.WriteLine("player has bomb: " + player.BombRemaining);
         }
         public void CountDown()
         {
-            TimeToExplosion--;
-        }
-        public void AddObserver(IObserver observer)
-        {
-            observers.Add(observer);
-        }
-        public void RemoveObserver(IObserver observer)
-        {
-            observers.Remove(observer);
-        }
-        public void NotifyObserver(IObservable subject)
-        {
-            foreach (IObserver observer in observers)
-            {
-                observer.UpdateFromSubject(subject);
-            }
+            TimeToFinish--;
         }
         public override void ResolveCollision(ICollidable collidable)
         {
@@ -60,7 +54,7 @@ namespace Bomberman_V3
         {
             if (IsCollidingWith(explosion))
             {
-                timeToExplosion = 1;
+                TimeToFinish = 1;
             }
         }
         public override void ResolveCollision(Player player)
@@ -73,7 +67,7 @@ namespace Bomberman_V3
         }
         private bool IsLeftAndCollidingWith(Player player)
         {
-            if (!isPlayerLeft) { isPlayerLeft = IsLeftBy(player); }
+            if (!isPlayerLeft) { isPlayerLeft = IsLeftByOwner(); }
             if (isPlayerLeft)
             {
                 if (IsCollidingWith(player))
@@ -83,7 +77,7 @@ namespace Bomberman_V3
             }
             return false;
         }
-        private bool IsLeftBy(Player player)
+        private bool IsLeftByOwner()
         {
             double rangeX1 = X - Tile.SIZE / 2;
             double rangeX2 = X + Tile.SIZE / 2;
@@ -91,13 +85,13 @@ namespace Bomberman_V3
             double rangeY2 = Y + Tile.SIZE / 2;
             if (rangeX1 - player.Size < player.X && player.X < rangeX2 && rangeY1 - player.Size < player.Y && player.Y < rangeY2)
             {
-                Console.WriteLine("The player has not left!");
-                return false;
+/*                Console.WriteLine("The player has not left!");
+*/                return false;
             }
             else
             {
-                Console.WriteLine("The player has left!");
-                return true;
+/*                Console.WriteLine("The player has left!");
+*/                return true;
             }
         }
     }

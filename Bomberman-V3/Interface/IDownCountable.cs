@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Bomberman_V3
 {
-    interface IMovable
+    public interface IDownCountable
     {
+        public int TimeToFinish { get; set; }
+        public bool Finished { get; }
+        public void CountDown();
     }
 }
