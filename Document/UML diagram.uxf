@@ -1,0 +1,1439 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>390</x>
+      <y>774</y>
+      <w>228</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>*DrawManager*
+--
++ Execute(gameobjects :: List&lt;GameObject&gt;)
+- DrawAllObjects(gameobjects :: List&lt;GameObject&gt;)
+- DrawMovableObjects(gameobjects :: List&lt;GameObject&gt;)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>588</x>
+      <y>444</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>*Bomberman*
+--
+- window :: Window
+- drawManager :: DrawManager
+- collisionManager :: CollisionManager
+- enemyMovementHandler :: EnemyMovementHandler
+- explosionManager :: ExplosionManager
+- map :: Tile[,]
+--
++ Bomberman(w::Window)
++ Draw()
++Update()
++Control()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>648</x>
+      <y>774</y>
+      <w>162</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*CollisionManager*
+--
++  Execute(colliders :: List&lt;GameObject&gt;)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>204</x>
+      <y>774</y>
+      <w>144</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*EnemyMovementHandler*
+--
++  Execute(enemies :: List&lt;Enemy&gt;)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1140</x>
+      <y>882</y>
+      <w>366</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>*ExplosionHandler*
+--
++  Execute(map :: Tile[,], Bomb explodedBomb :: Bomb)
+- IsExplosableAt(map :: Tile[,], explosionRow :: int, explosionCol :: int, ContinueExplosion :: bool)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1200</x>
+      <y>774</y>
+      <w>246</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>*ExplosionManager*
+--
+- explosionHandler :: ExplosionHandler
+- theMap :: Tile[,]
+--
++  Execute(bombs :: List&lt;Bomb&gt;, explosions :: List&lt;Explosion&gt;)
+- CountDownBomb(bombs :: List&lt;Bomb&gt;)
+- HandleExplosion(bombs :: List&lt;Bomb&gt;)
+- CountDownExplosion(explosions :: List&lt;Explosion&gt;)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>654</x>
+      <y>348</y>
+      <w>78</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+*IGameManager*
+--
++ Draw()
++ Update()
++ Control()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>642</x>
+      <y>240</y>
+      <w>102</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>*Game*
+--
+- game :: IGameManager
+--
+/+ Game()/
+/+ Load()/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>852</x>
+      <y>234</y>
+      <w>240</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>*GameObjectManager*
+--
+- gameobjects :: List&lt;GameObject&gt;
+- toRemove :: List&lt;GameObject&gt;
+_- instance :: GameObjectManager_
+
+--
+
+_+ Instance() :: GameObjectManager_
+
++ GameObjectsList :: List&lt;GameObject&gt; &lt;&lt;readonly, property&gt;&gt;
++ BombsList :: List&lt;Bomb&gt; &lt;&lt;readonly, property&gt;&gt;
++ ExplosionsList :: List&lt;Explosion&gt; &lt;&lt;readonly, property&gt;&gt;
++ PlayersList :: List&lt;Player&gt; &lt;&lt;readonly, property&gt;&gt;
++ ItemsList :: List&lt;Player&gt; &lt;&lt;readonly, property&gt;&gt;
++ TilesList :: List&lt;Item&gt; &lt;&lt;readonly, property&gt;&gt;
++ EnemiesList :: List&lt;Enemy&gt; &lt;&lt;readonly, property&gt;&gt;
+
++ Add(newObject :: GameObject)
++ RefreshObjectList()
+- RemoveRemovableObject()
+- AddToRemove(removedGO :: GameObject)
+- ClearUpRemovedList()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>708</x>
+      <y>1716</y>
+      <w>162</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;abstract&gt;&gt;
+*Shape*
+--
+-x :: float
+-y :: float
+-color :: Color
+--
++ Shape(x :: float, y :: float, color :: Color)
+/+ IsAt(point : Point2D) : bool &lt;&lt;abstract&gt;&gt;/
++ Draw()
++ X : float &lt;&lt;property&gt;&gt;
++ Y : float &lt;&lt;property&gt;&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>786</x>
+      <y>1872</y>
+      <w>264</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>*Rectangle*
+--
+-_width :: float
+-_height :: float
+--
++ Rectangle(x : float, y : float, color : Color, width : float, height : float)
++ IsAt(point : Point2D) : bool &lt;&lt;override&gt;&gt;
++ Draw() &lt;&lt;override&gt;&gt;
++ Width : float &lt;&lt;property&gt;&gt;
++ Height : float &lt;&lt;property&gt;&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>546</x>
+      <y>1872</y>
+      <w>204</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>*Circle*
+--
+-_radius :: float
+--
++ Circle(x : float, y : float, color : Color, radius : float)
++ IsAt(point : Point2D) : bool &lt;&lt;override&gt;&gt;
++ Draw() &lt;&lt;override&gt;&gt;
++ Radius : float &lt;&lt;property&gt;&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>606</x>
+      <y>1536</y>
+      <w>162</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+*ICollidable*
+--
+/+ ResolveCollision(collidable : ICollidable)/
+/+ ResolveCollision(tile : BreakableTile)/
+/+ ResolveCollision(tile : UnbreakableTile)/
+/+ ResolveCollision(player : Player)/
+/+ ResolveCollision(explosion : Explosion)/
+/+ ResolveCollision(enemy : Enemy)/
+/+ ResolveCollision(bomb : Bomb)/
+/+ ResolveCollision(item : Item)/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1296</x>
+      <y>1068</y>
+      <w>210</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>*Bomb*
+--
+- TIME : const int = 100
+- player : Player
+- timeToFinish : int = TIME
+- BombSize : float &lt;&lt;readonly&gt;&gt;
+- isPlayerLeft : bool
+- finished : bool
+--
++ Bomb(x : float, y : float, owner : Player)
++ IsPlayerLeft(player : Player) : bool
++ CountDown()
+
++ ResolveCollision(collidable : ICollidable) &lt;&lt;override&gt;&gt;
++ ResolveCollision(player : Player) &lt;&lt;override&gt;&gt;
++ ResolveCollision(explosion : Explosion) &lt;&lt;override&gt;&gt;
+- IsLeftAndCollidingWith(player : Player)
+- IsLeftByOwner()
+
++ BombRadius : float &lt;&lt;readonly, property&gt;&gt;
++ IsRemoved : float &lt;&lt;readonly, property&gt;&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1548</x>
+      <y>1380</y>
+      <w>126</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>*Info*
+--
++ Info()
++ RowStart : int &lt;&lt;property&gt;&gt;
++ ColStart : int &lt;&lt;property&gt;&gt;
++ Color : Color &lt;&lt;property&gt;&gt;
++ BombColor : Color &lt;&lt;property&gt;&gt;
++ Speed : float &lt;&lt;property&gt;&gt;
++ Size float &lt;&lt;property&gt;&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1548</x>
+      <y>1488</y>
+      <w>126</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>*PlayerIdentity*
+--
+- _id : string
+--
++ PlayerIdentity(id : string)
++ SetInfo(info : Info)
+- GetRowStart()
+- GetColStart()
+- GetPlayerColor()
+- GetBombColor()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1296</x>
+      <y>1296</y>
+      <w>210</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>*Player*
+--
+- info : Info
+- bombCount : int
+- bombRadius : int
+- bombRemaining : int
+- hasBomb : bool
+- lastX, lastY : float
+--
++ Player(id : string)
++ ResetBomb()
++ LoseOneBomb()
++ Move(horizonDir : int, verticalDir : int)
++ StoreLastPosition()
+- ChangeOppositeDirection()
+- Respawn()
+
++ ResolveCollision(collidable : ICollidable) &lt;&lt;override&gt;&gt;
++ ResolveCollision(tile : BreakableTile) &lt;&lt;override&gt;&gt;
++ ResolveCollision(tile : UnbreakableTile) &lt;&lt;override&gt;&gt;
++ ResolveCollision(player : Player) &lt;&lt;override&gt;&gt;
++ ResolveCollision(explosion : Explosion) &lt;&lt;override&gt;&gt;
++ ResolveCollision(enemy : Enemy) &lt;&lt;override&gt;&gt;
++ ResolveCollision(bomb : Bomb) &lt;&lt;override&gt;&gt;
+
++ BombColor : Color &lt;&lt;readonly, property&gt;&gt;
++ BombCount : int &lt;&lt;property&gt;&gt;
++ BombRadius : int &lt;&lt;property&gt;&gt;
++ HasBomb : bool &lt;&lt;property&gt;&gt;
++ Size : float &lt;&lt;property&gt;&gt;
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1296</x>
+      <y>1590</y>
+      <w>204</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>*Item*
+--
+- SIZE : int = 15
+- removed : bool
+--
++ Item(float x, float y, Color)
+/# AddToPlayer(player : Player) &lt;&lt;abstract&gt;&gt;/
+
++ ResolveCollision(collidable : ICollidable) &lt;&lt;override&gt;&gt;
++ ResolveCollision(player : Player) &lt;&lt;override&gt;&gt;
+
++ IsRemoved : bool &lt;&lt;readonly, property&gt;&gt;
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1524</x>
+      <y>1590</y>
+      <w>162</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>*BombCounter*
+--
++ BombCounter(float x, float y)
+# AddToPlayer(player : Player) &lt;&lt;override&gt;&gt;
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1524</x>
+      <y>1656</y>
+      <w>162</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>*BombRadius*
+--
++ BombRadius(float x, float y)
+# AddToPlayer(player : Player) &lt;&lt;override&gt;&gt;
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>990</x>
+      <y>1326</y>
+      <w>162</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+*IRemovable*
+--
+/+ IsRemoved : bool &lt;&lt;readonly, property&gt;&gt;/
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1296</x>
+      <y>1716</y>
+      <w>204</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>*Tile*
+--
+_- SIZE : float = 50_
+--
++ Tile(float x, float y, Color)
++ ResolveCollision(collidable : ICollidable) &lt;&lt;override&gt;&gt;
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1434</x>
+      <y>1800</y>
+      <w>204</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>*UnbreakableTile*
+--
++ UnbreakableTile(float x, float y)
++ ResolveCollision(collidable : ICollidable) &lt;&lt;override&gt;&gt;
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1224</x>
+      <y>1800</y>
+      <w>204</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>*BreakableTile*
+--
+- destroyed : bool
+--
++ BreakableTile(float x, float y)
++ ResolveCollision(collidable : ICollidable) &lt;&lt;override&gt;&gt;
++ ResolveCollision(explosion : Explosion) &lt;&lt;override&gt;&gt;
+
++ IsRemoved : bool &lt;&lt;readonly, property&gt;&gt;
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1950</x>
+      <y>1734</y>
+      <w>108</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+*FloorTile*
+--
+GRASS
+UNBREAKABLEBLOCK
+BREAKABLEBLOCK
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1698</x>
+      <y>1704</y>
+      <w>198</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>*Floor*
+--
+- BREAKABLE_TILE_CHANCE : const double = 0.2
+- draft : FloorTile[,]
+- map : Tile[,]
+- rowN : int
+- colN : int
+--
++ Floor(w : Window)
++ Map : Tile[,] &lt;&lt;readonly, property&gt;&gt;
+- InstantiateMap()
+- AddBreakable()
+- AddUnBreakableAndGrass()
+- ClearUpForSpawn()
+- InstantiateFromFloorTile()
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>858</x>
+      <y>1536</y>
+      <w>210</w>
+      <h>156</h>
+    </coordinates>
+    <panel_attributes>*GameObject*
+--
+/+ ResolveCollision(collidable : ICollidable) &lt;&lt;abstract&gt;&gt;/
++ ResolveCollision(tile : BreakableTile) &lt;&lt;virtual&gt;&gt;
++ ResolveCollision(tile : UnbreakableTile) &lt;&lt;virtual&gt;&gt;
++ ResolveCollision(player : Player) &lt;&lt;virtual&gt;&gt;
++ ResolveCollision(explosion : Explosion) &lt;&lt;virtual&gt;&gt;
++ ResolveCollision(enemy : Enemy) &lt;&lt;virtual&gt;&gt;
++ ResolveCollision(bomb : Bomb) &lt;&lt;virtual&gt;&gt;
++ ResolveCollision(item : Item) &lt;&lt;virtual&gt;&gt;
+
++ GameObject()
++ IsCollidingWith(collider : GameObject) : bool
++ Shape : Shape &lt;&lt;property&gt;&gt;
++ X : float &lt;&lt;property&gt;&gt;
++ Y : float &lt;&lt;property&gt;&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1296</x>
+      <y>942</y>
+      <w>210</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>*Explosion*
+--
+- DURATION : const int = 20
+- timeToFinish : int = DURATION
+- size : float
+- finished : bool
+--
++ Explosion(x : float, y : float)
++ CountDown()
++ ResolveCollision(collidable : ICollidable) &lt;&lt;override&gt;&gt;
++ IsRemoved : float &lt;&lt;readonly, property&gt;&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1290</x>
+      <y>1896</y>
+      <w>210</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>*Enemy*
+--
+_- speed : float_
+- Direction : Direction
+- size : int
+- dead : bool
+--
++ Enemy(x : float, y : float)
++ Move()
++ RandomiseDirection()
+- ChangeOppositeDirection()
+
++ ResolveCollision(collidable : ICollidable) &lt;&lt;override&gt;&gt;
++ ResolveCollision(tile : BreakableTile) &lt;&lt;override&gt;&gt;
++ ResolveCollision(tile : UnbreakableTile) &lt;&lt;override&gt;&gt;
++ ResolveCollision(player : Player) &lt;&lt;override&gt;&gt;
++ ResolveCollision(explosion : Explosion) &lt;&lt;override&gt;&gt;
++ ResolveCollision(bomb : Bomb) &lt;&lt;override&gt;&gt;
+
++ IsRemoved : float &lt;&lt;readonly, property&gt;&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1770</x>
+      <y>1302</y>
+      <w>108</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>*Command*
+--
++ Execute() &lt;&lt;virtual&gt;&gt;
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1596</x>
+      <y>1260</y>
+      <w>144</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>*CommandProccessor*
+--
+- noOfCommands : const int = 5
+- thePlayer : List&lt;Player&gt;
+- buttons : List&lt;KeyCode&gt;
+_- instance : CommandProcessor_
+--
+_+ Instance() : CommandProcessor_
++ AddPlayer(newPlayer : Player)
++ Execute()
+- handleInputPlayer1() : Command
+- handleInputPlayer2() : Command
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2106</x>
+      <y>1536</y>
+      <w>66</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+*Direction*
+--
+UP
+DOWN
+RIGHT
+LEFT
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1968</x>
+      <y>1236</y>
+      <w>186</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>*Move*
+--
+- thePlayer : Player
+- direction : Direction
+--
++ Move(newPlayer : Player, direction Direction)
++ Execute() &lt;&lt;override&gt;&gt;
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1914</x>
+      <y>1326</y>
+      <w>144</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>*PlaceBomb*
+--
+- thePlayer : Player
+--
++ PlaceBomb(newPlayer : Player)
++ Execute() &lt;&lt;override&gt;&gt;
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>990</x>
+      <y>1380</y>
+      <w>162</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+*IMovable*
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>876</x>
+      <y>1716</y>
+      <w>210</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>*CollisionChecker*
+--
+_- instance : CommandProcessor_
+--
+_+ Instance() : CommandProcessor_
+
++ IsColliding(s1 : Shape, s2 : Shape) : bool
+- CheckCollision(s1 : Rectangle, s2 : Rectangle) : bool
+- CheckCollision(s1 : Rectangle, s2 : Circle) : bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1158</x>
+      <y>258</y>
+      <w>306</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>*Conversion*
+--
+_- instance : CommandProcessor_
+--
+_+ Instance() : CommandProcessor_
+
++ GetTileMiddleCoordByPlayerCoord(coord : float) : float
++ GetTileCornerCoordByPlayerCoord(coord : float) : float
++ GetIndexByCoord(coord : float) : int
++ GetCoordByIndex(index : int) : float
+- ConvertCoordIntoIndex(coord : float) : int
+- ConvertIndexIntoCoord(index : int) : float
+--
+Responsiblities
+--Resp1: convert X from float coordinate into Row index based on the Tile[,] map
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1152</x>
+      <y>420</y>
+      <w>336</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>*Factory*
+--
+_- instance : CommandProcessor_
+--
+_+ Instance() : CommandProcessor_
+
++ InstantiatePlayer(id : string)
++ InstantiateTile(rowIndex : int, colIndex : int, type : FloorTile) : Tile
++ InstantiateBomb(thePlayer : Player)
++ InstantiateExplosion(rowIndex : int, colIndex : int)
++ InstantiateItem(rowIndex : int, colIndex : int)
++ InstantiateEnemies(map : Tile[,], noOfEnemies : int)
+--
+Responsibilities
+-- Resp 1 : Instantiate the objects, so it has an associaton relationship with those objects</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>786</x>
+      <y>1824</y>
+      <w>150</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;230.0;50.0;230.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>642</x>
+      <y>1824</y>
+      <w>144</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>220.0;10.0;220.0;50.0;10.0;50.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>858</x>
+      <y>1686</y>
+      <w>24</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>966</x>
+      <y>1686</y>
+      <w>18</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>762</x>
+      <y>1578</y>
+      <w>108</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1062</x>
+      <y>1422</y>
+      <w>246</w>
+      <h>192</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>390.0;10.0;220.0;10.0;220.0;300.0;10.0;300.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1500</x>
+      <y>1416</y>
+      <w>60</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1500</x>
+      <y>1530</y>
+      <w>60</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1602</x>
+      <y>1464</y>
+      <w>18</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>954</x>
+      <y>444</y>
+      <w>30</w>
+      <h>1104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;1820.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1062</x>
+      <y>1596</y>
+      <w>246</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>390.0;80.0;220.0;80.0;220.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1392</x>
+      <y>1560</y>
+      <w>18</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1494</x>
+      <y>1608</y>
+      <w>42</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1494</x>
+      <y>1674</y>
+      <w>42</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1062</x>
+      <y>1158</y>
+      <w>246</w>
+      <h>456</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>390.0;10.0;220.0;10.0;220.0;740.0;10.0;740.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1392</x>
+      <y>1260</y>
+      <w>24</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1062</x>
+      <y>1596</y>
+      <w>246</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>390.0;250.0;220.0;250.0;220.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1386</x>
+      <y>1764</y>
+      <w>162</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>250.0;60.0;250.0;20.0;10.0;20.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1314</x>
+      <y>1764</y>
+      <w>90</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;20.0;130.0;20.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1494</x>
+      <y>1734</y>
+      <w>216</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>340.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1062</x>
+      <y>1596</y>
+      <w>240</w>
+      <h>408</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>380.0;660.0;220.0;660.0;220.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1062</x>
+      <y>990</y>
+      <w>246</w>
+      <h>624</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>390.0;10.0;220.0;10.0;220.0;1020.0;10.0;1020.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1146</x>
+      <y>1014</y>
+      <w>162</w>
+      <h>348</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>250.0;10.0;60.0;10.0;60.0;560.0;10.0;560.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1146</x>
+      <y>1176</y>
+      <w>162</w>
+      <h>186</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>250.0;10.0;60.0;10.0;60.0;290.0;10.0;290.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1152</x>
+      <y>1344</y>
+      <w>162</w>
+      <h>282</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>250.0;450.0;50.0;450.0;50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1146</x>
+      <y>1344</y>
+      <w>90</w>
+      <h>498</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>130.0;810.0;60.0;810.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1146</x>
+      <y>1344</y>
+      <w>156</w>
+      <h>630</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>240.0;1030.0;60.0;1030.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1146</x>
+      <y>1404</y>
+      <w>162</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>250.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1152</x>
+      <y>1404</y>
+      <w>150</w>
+      <h>540</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>230.0;880.0;10.0;880.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1500</x>
+      <y>1320</y>
+      <w>108</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=0..2</panel_attributes>
+    <additional_attributes>160.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1734</x>
+      <y>1314</y>
+      <w>48</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1872</x>
+      <y>1260</y>
+      <w>108</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>160.0;10.0;20.0;10.0;20.0;100.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1872</x>
+      <y>1314</y>
+      <w>54</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>70.0;60.0;20.0;60.0;20.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1500</x>
+      <y>1194</y>
+      <w>570</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+receiver</panel_attributes>
+    <additional_attributes>10.0;180.0;80.0;180.0;80.0;10.0;930.0;10.0;930.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1932</x>
+      <y>1194</y>
+      <w>18</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;220.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1890</x>
+      <y>1770</y>
+      <w>72</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2136</x>
+      <y>1290</y>
+      <w>24</w>
+      <h>258</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;410.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1494</x>
+      <y>1602</y>
+      <w>666</w>
+      <h>396</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>1080.0;10.0;1080.0;640.0;10.0;640.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1320</x>
+      <y>852</y>
+      <w>24</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1500</x>
+      <y>894</y>
+      <w>84</w>
+      <h>282</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;..</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0;120.0;450.0;10.0;450.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1440</x>
+      <y>816</y>
+      <w>144</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;..</panel_attributes>
+    <additional_attributes>10.0;10.0;220.0;10.0;220.0;580.0;110.0;580.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1440</x>
+      <y>834</y>
+      <w>126</w>
+      <h>174</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;..</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;10.0;190.0;270.0;110.0;270.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>714</x>
+      <y>798</y>
+      <w>204</w>
+      <h>750</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;980.0;320.0;980.0;320.0;1230.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>816</y>
+      <w>438</w>
+      <h>732</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;950.0;710.0;950.0;710.0;1200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>264</x>
+      <y>798</y>
+      <w>1152</w>
+      <h>1320</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;2170.0;1900.0;2180.0;1900.0;2110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>558</y>
+      <w>432</w>
+      <h>228</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>700.0;10.0;700.0;180.0;10.0;180.0;10.0;360.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>504</x>
+      <y>558</y>
+      <w>198</w>
+      <h>228</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>310.0;10.0;310.0;180.0;10.0;180.0;10.0;360.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>684</x>
+      <y>558</y>
+      <w>60</w>
+      <h>228</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;180.0;80.0;180.0;80.0;360.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>684</x>
+      <y>558</y>
+      <w>660</w>
+      <h>228</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;180.0;1080.0;180.0;1080.0;360.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>684</x>
+      <y>402</y>
+      <w>18</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>684</x>
+      <y>294</y>
+      <w>36</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+uses</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1062</x>
+      <y>444</y>
+      <w>36</w>
+      <h>894</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+uses</panel_attributes>
+    <additional_attributes>10.0;1470.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>816</y>
+      <w>462</w>
+      <h>600</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+uses</panel_attributes>
+    <additional_attributes>750.0;980.0;10.0;980.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>648</x>
+      <y>798</y>
+      <w>36</w>
+      <h>744</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+uses</panel_attributes>
+    <additional_attributes>10.0;1220.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
