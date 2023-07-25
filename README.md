@@ -20,7 +20,7 @@ The Bomber Man Game is developed using C# and utilizes external libraries for gr
 
 ## How to Play
 
-1. Download the game executable file from the releases section.
+1. Download the game executable file from the file Bomberman-V3.
 2. Run the executable file to start the game.
 3. Use arrow keys to move the player character.
 4. Press the spacebar to place a bomb at the player's current location.
