@@ -14,6 +14,9 @@ When the breakable blocks are destroyed by the bombs, special items may be produ
 - Players win by eliminating all enemies.
 - Players lose the game if they run out of health points (HP).
 
+![Bomberman Game Screenshot](https://github.com/jamesngn/Bomberman/blob/master/Document/Screenshot%20Custom%20Program.png)
+(Note: This image showcases a screenshot of the custom program based on the childhood game 'Bomberman'.)
+
 ## Technology
 
 The Bomber Man Game is developed using C# and utilizes external libraries for graphics and user interface.
